@@ -1,26 +1,43 @@
-const input = document.querySelector("#display");
+const calculator = document.getElementById("calculator");
+const displayArea = document.getElementById("display");
 
-function appendToDisplay(ele) {
-  input.value += ele;
+calculator.addEventListener("click", (ele) => {
+  if (ele.target.nodeName == "BUTTON") {
+    switch (ele.target.textContent) {
+      case "CE":
+        clearDisplay();
+        break;
+      case "DEL":
+        clearLastValue();
+        break;
+      case "=":
+        calculate();
+        break;
+      default:
+        appendToDisplay(ele.target.textContent);
+    }
+  }
+});
+
+/*
+     *>>>>>>>>>>>>>>>>>>>>>>> FUNCTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ */
+
+     function appendToDisplay(ele) {
+  displayArea.value += ele;
 }
+
 function calculate() {
   try {
-    input.value = eval(input.value);
+    displayArea.value = eval(displayArea.value);
   } catch (error) {
-    input.value = "Erorr";
+    displayArea.value = displayArea.value;
   }
 }
 
 function clearDisplay() {
-  input.value = "";
+  displayArea.value = "";
 }
 function clearLastValue() {
-  input.value = input.value.slice(0, -1);
-}
-function sqrtValue() {
-  try {
-    input.value = Mathgit .sqrt(Number(input.value));
-  } catch (error) {
-    input.value = "Error";
-  }
+  displayArea.value = displayArea.value.slice(0, -1);
 }
